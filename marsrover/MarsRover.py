@@ -1,8 +1,7 @@
 from enum import Enum
-from enum import Enum
+
 
 class Point(object):
-
     cord_x = 0
     cord_y = 0
 
@@ -13,18 +12,18 @@ class Point(object):
     def __str__(self) -> str:
         return "x: {}, y: {}".format(self.cord_x, self.cord_y)
 
+
 class Direction(Enum):
     N = 0
-    S=2
-    E=3
-    W=1
+    S = 2
+    E = 3
+    W = 1
     lenght = 4
 
 
-
 class MarsRover(object):
-    pos = Point(0,0)
-    plateau = Point(0,0)
+    pos = Point(0, 0)
+    plateau = Point(0, 0)
     direction = Direction.N
 
     def __init__(self, p: Point, d: Direction, pl: Point) -> None:
@@ -37,15 +36,14 @@ class MarsRover(object):
         new_direction = (self.direction.value + 1) % Direction.lenght.value
         self.direction = Direction(new_direction)
 
-
     def spin_right(self) -> None:
         print('right')
-        new_direction = (self.direction.value -1)
+        new_direction = (self.direction.value - 1)
         if new_direction < 0:
             new_direction = Direction.lenght.value - 1
         self.direction = Direction(new_direction)
 
-    def move_rover(self)-> None:
+    def move_rover(self) -> None:
         if self.direction == Direction.N:
             self.pos.cord_y = self.pos.cord_y + 1
 
@@ -58,13 +56,10 @@ class MarsRover(object):
         if self.direction == Direction.W:
             self.pos.cord_x = self.pos.cord_x - 1
 
-
         if self.pos.cord_x > self.plateau.cord_x or self.pos.cord_y > self.plateau.cord_y:
             raise Exception("invalid move")
 
         print('move rover')
-
-
 
     def process_command(self, command_string: str):
         moves = list(command_string)
@@ -84,8 +79,8 @@ class MarsRover(object):
             print('-------')
 
 
-#
-# rover = MarsRover(Point(3,3), Direction.E, Point(5,5))
-# rover.process_command("MMRMMRMRRM")
-# print(rover.pos)
-# print(rover.direction)
+
+rover = MarsRover(Point(3, 3), Direction.E, Point(5, 5))
+rover.process_command("MMRMMRMRRM")
+print(rover.pos)
+print(rover.direction)
