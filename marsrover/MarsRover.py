@@ -32,12 +32,10 @@ class MarsRover(object):
         self.plateau = pl
 
     def spin_left(self) -> None:
-        print('left')
         new_direction = (self.direction.value + 1) % Direction.lenght.value
         self.direction = Direction(new_direction)
 
     def spin_right(self) -> None:
-        print('right')
         new_direction = (self.direction.value - 1)
         if new_direction < 0:
             new_direction = Direction.lenght.value - 1
@@ -58,8 +56,6 @@ class MarsRover(object):
 
         if self.pos.cord_x > self.plateau.cord_x or self.pos.cord_y > self.plateau.cord_y:
             raise Exception("invalid move")
-
-        print('move rover')
 
     def process_command(self, command_string: str):
         moves = list(command_string)
